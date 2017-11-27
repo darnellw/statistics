@@ -1,3 +1,3 @@
 # statistics
 
-Bash scripts that perform various statistical analyses.
+Simple bash script that displays descriptive statistics of quantitative data.

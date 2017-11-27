@@ -46,7 +46,7 @@ v=$(bc <<< "scale=8;$sum_sq/($n-1)")
 sx=$(bc <<< "scale=4;sqrt($v)")
 
 # Print table header
-header="Statistics of \"$1\""
+header="Descriptive Statistics of \"$1\""
 echo $header
 
 # Print table underline
