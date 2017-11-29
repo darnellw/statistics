@@ -15,9 +15,6 @@ OLD_IFS=$IFS
 # Check if IFS is supplied
 if [ $# -eq 2 ]; then
   case $2 in
-    space)
-      IFS=' '
-      ;;
     comma)
       IFS=','
       ;;
