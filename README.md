@@ -1,6 +1,5 @@
 # statistics
 
-Simple test bash script that displays descriptive statistics of quantitative data.
-Accepts two arguments:
-  1) The .txt file containing the raw quantitative data
-  2) An optional IFS specifier as a string (choices consist of 'space', 'comma', and 'semicolon'). If not specified, uses the default IFS.
+Simple bash scripts that perform various statistical analyses on data sets.
+
+basic_stats.sh: outputs descriptive statistics of quantitative data sets contained in .txt files. Accepts two arguments: the name of the .txt file and an optional IFS specifier string (options are 'space', 'semicolon', and 'comma').

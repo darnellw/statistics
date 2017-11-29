@@ -80,6 +80,10 @@ else
   med=$((data[n/2]))
 fi
 
+# Find minimum and maximum usual value
+min_usual=$(bc <<< "scale=8;$mean-(2*$sx)")
+max_usual=$(bc <<< "scale=8;$mean+(2*$sx)")
+
 # Print table header
 header="Descriptive Statistics of \"$1\""
 echo "$header"
@@ -100,4 +104,6 @@ printf "$table" \
 "Mean" "$mean" \
 "Variance" "$v" \
 "Standard deviation" "$sx" \
-"Median" "$med"
+"Median" "$med" \
+"Minimum usual value" "$min_usual" \
+"Maximum usual value" "$max_usual"
