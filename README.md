@@ -1,4 +1,4 @@
-# Bash scripts for statistical analysis
+# Bash scripts for statistical analyses
 
 Simple bash scripts that perform various statistical analyses on data sets.
 
