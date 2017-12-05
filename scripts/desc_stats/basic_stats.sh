@@ -1,23 +1,22 @@
 #! /bin/bash
 
 # This script accepts a list of raw data values as an argument and outputs
-# basic statictics about that data.
+# statictics about that data.
+# An optional IFS specifier can be supplied as the second argument to the
+# script in the form of a string (current options are 'comma' and 'semicolon').
 
-# Quit if file not found
+# Stop script if file not found
 if [ ! -f "$1" ]; then
   echo "Error: file $1 not found."
   exit 1
 fi
 
 # Preserve existing IFS
-OLD_IFS=$IFS
+OLD_IFS="$IFS"
 
-# Check if IFS is supplied
+# Set new IFS if new IFS is supplied
 if [ $# -eq 2 ]; then
   case $2 in
-    space)
-      IFS=' '
-      ;;
     comma)
       IFS=','
       ;;
@@ -48,13 +47,13 @@ for (( i=1; i<data_len; i++ )); do
 done
 
 # Ensure IFS is set to default
-IFS=OLD_IFS
+IFS="$OLD_IFS"
 
 # Initially set min and max to the first value in the data set
 min="${data[0]}"
 max="${data[0]}"
 
-# Find sum, min, max, and n
+# Find sum, min, max, and count (n)
 for num in "${data[@]}"; do
   sum=$((sum + num))
   if ((num < min)); then
@@ -64,9 +63,6 @@ for num in "${data[@]}"; do
   fi
   ((n++))
 done
-
-# Declare associative array for finding mode
-declare -A counts
 
 # Find mean
 mean=$(bc <<< "scale=8; $sum/$n")
@@ -79,7 +75,7 @@ for num in "${data[@]}"; do
   sum_sq=$(bc <<< "scale=8; $sum_sq+$sq_diff")
 done
 v=$(bc <<< "scale=8; $sum_sq/($n-1)")
-sx=$(bc <<< "scale=4; sqrt($v)")
+sx=$(bc <<< "scale=8; sqrt($v)")
 
 # Find the median and divide data into two sub-lists (to find Q1 and Q3)
 if ((n % 2 == 0)); then
@@ -104,7 +100,7 @@ else
   q3=$((sub_upper[sub_n/2]))
 fi
 
-# Find minimum and maximum usual value
+# Find minimum and maximum usual values
 min_usual=$(bc <<< "scale=8; $mean-(2*$sx)")
 max_usual=$(bc <<< "scale=8; $mean+(2*$sx)")
 
@@ -113,7 +109,8 @@ header="Descriptive Statistics of \"$1\""
 echo "$header"
 
 # Print table underline
-size=${#header}; i=0
+size=${#header}
+i=0
 while ((i < size)); do
   printf "="
   ((i++))
