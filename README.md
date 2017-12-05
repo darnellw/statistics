@@ -7,7 +7,7 @@ For example, to analyze data elements separated by newlines or spaces (assuming 
 ```
 ./basic_stats.sh data_1.txt
 ```
-The example data file `data_3.csv` contains data separated by commas. Using the `comma` specifier:
+The example data file `data_3.csv` contains data separated by commas. Using the `comma` specifier enables the script to work with the .csv file:
 ```
 ./basic_stats.sh data_3.txt comma
 ```
